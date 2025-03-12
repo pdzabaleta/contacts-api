@@ -1,25 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
+const dotenv = require('dotenv');
 
-const contactsRoutes = require('./routes/contacts');
+dotenv.config();
+
+const contactsRoutes = require('./routes/contacts'); 
+const indexRoutes = require('./routes/index'); 
 
 const app = express();
-app.use(cors());
+const PORT = process.env.PORT || 8080;
+
 app.use(express.json());
 
+app.use('/', indexRoutes);
 app.use('/contacts', contactsRoutes);
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('✅ Connected to MongoDB');
-}).catch(err => {
-  console.error('❌ MongoDB connection error:', err);
-});
-
-app.listen(8080, () => {
-  console.log('🚀 Server running on port 8080');
-});
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('✅ Connected to MongoDB');
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+  })
+  .catch(error => console.error('❌ MongoDB connection error:', error));
