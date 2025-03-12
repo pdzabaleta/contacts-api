@@ -1,0 +1,9 @@
+### Get all contacts
+GET http://localhost:8080/contacts
+
+GET https://contacts-api-drke.onrender.com/contacts
+
+### Get a single contact by ID
+GET http://http://localhost:8080/contacts/67d0f7ba6b66040ac06846a5
+
+GET https://contacts-api-drke.onrender.com/contacts//67d0f7ba6b66040ac06846a5
