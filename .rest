@@ -1,9 +1,65 @@
-### Get all contacts
+### Get all contacts (Local)
 GET http://localhost:8080/contacts
 
+### Get all contacts (Render)
 GET https://contacts-api-drke.onrender.com/contacts
 
-### Get a single contact by ID
-GET http://http://localhost:8080/contacts/67d0f7ba6b66040ac06846a5
+### Get a single contact by ID (Local)
+GET http://localhost:8080/contacts/67d0f7ba6b66040ac06846a5
 
-GET https://contacts-api-drke.onrender.com/contacts//67d0f7ba6b66040ac06846a5
+### Get a single contact by ID (Render)
+GET https://contacts-api-drke.onrender.com/contacts/67d0f7ba6b66040ac06846a5
+
+### Create a new contact (Local)
+POST http://localhost:8080/contacts
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "favoriteColor": "blue",
+  "birthday": "1990-01-01"
+}
+
+### Create a new contact (Render)
+POST https://contacts-api-drke.onrender.com/contacts
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "favoriteColor": "blue",
+  "birthday": "1990-01-01"
+}
+
+### Update a contact (Local)
+PUT http://localhost:8080/contacts/67d0f7ba6b66040ac06846a5
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "email": "jane.doe@example.com",
+  "favoriteColor": "green",
+  "birthday": "1991-02-02"
+}
+
+### Update a contact (Render)
+PUT https://contacts-api-drke.onrender.com/contacts/67d0f7ba6b66040ac06846a5
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "email": "jane.doe@example.com",
+  "favoriteColor": "green",
+  "birthday": "1991-02-02"
+}
+
+### Delete a contact (Local)
+DELETE http://localhost:8080/contacts/67d0f7ba6b66040ac06846a5
+
+### Delete a contact (Render)
+DELETE https://contacts-api-drke.onrender.com/contacts/67d0f7ba6b66040ac06846a5
