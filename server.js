@@ -7,16 +7,22 @@ const cors = require('cors');
 
 dotenv.config();
 
-const contactsRoutes = require('./routes/contacts'); 
-const indexRoutes = require('./routes/index'); 
+const contactsRoutes = require('./routes/contacts');
+const indexRoutes = require('./routes/index');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(cors()); // ✅ CORS debe ir antes de definir las rutas
+// Habilita CORS y JSON
+app.use(cors());
 app.use(express.json());
 
-// Configuración de Swagger
+// Configuración dinámica para Swagger:
+// Si se define BASE_URL en .env (por ejemplo, en Render) se usará esa, 
+// de lo contrario se usará la URL local.
+const serverUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
+const serverDescription = process.env.BASE_URL ? "Production server" : "Local server";
+
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
@@ -27,12 +33,8 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:8080', 
-        description: "Local server"
-      },
-      {
-        url: 'https://contacts-api-drke.onrender.com', 
-        description: "Production server"
+        url: serverUrl,
+        description: serverDescription
       }
     ]
   },
