@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
+const cors = require('cors');
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const indexRoutes = require('./routes/index');
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.use(cors()); // ✅ CORS debe ir antes de definir las rutas
 app.use(express.json());
 
 // Configuración de Swagger
@@ -25,11 +27,15 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: process.env.BASE_URL || `http://localhost:${PORT}`
+        url: 'http://localhost:8080', 
+        description: "Local server"
+      },
+      {
+        url: 'https://contacts-api-drke.onrender.com', 
+        description: "Production server"
       }
     ]
   },
-  // Indica dónde se encuentran los comentarios JSDoc para documentar tus endpoints
   apis: ['./routes/*.js'],
 };
 

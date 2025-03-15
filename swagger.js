@@ -1,4 +1,3 @@
-// swagger.js
 const swaggerJsdoc = require('swagger-jsdoc');
 const fs = require('fs');
 const dotenv = require('dotenv');
@@ -14,7 +13,12 @@ const options = {
     },
     servers: [
       {
-        url: process.env.BASE_URL || 'http://localhost:8080'
+        url: 'http://localhost:8080', 
+        description: "Local server"
+      },
+      {
+        url: 'https://contacts-api-drke.onrender.com', 
+        description: "Production server"
       }
     ]
   },
@@ -27,6 +31,6 @@ fs.writeFile('./swagger-output.json', JSON.stringify(swaggerSpec, null, 2), (err
   if (err) {
     console.error("Error generating Swagger JSON:", err);
   } else {
-    console.log("swagger-output.json generated successfully!");
+    console.log("✅ swagger-output.json generated successfully!");
   }
 });
